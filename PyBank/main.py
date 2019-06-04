@@ -7,34 +7,64 @@ import csv
 csvpath = 'budget_data.csv'
 
 # Calculating The Data
-def print_data(bank_data):
+#def print_data(bank_data):
 
         #Defining Variables
-        month = str(bank_data[0])
-        profit = int(bank_data[1])
+        #month = str(bank_data[0])
+        #profit = int(bank_data[1])
 
-# Total number of months
-months_count = 0
-
+#lists to store data
+dates_list = []
+profit_list = []
 
 
 with open(csvpath, newline='') as csvfile:
+        # CSV reader specifies delimiter and variable that holds contents
+        csvreader = csv.reader(csvfile, delimiter=',')
 
-     # CSV reader specifies delimiter and variable that holds contents
-     csvreader = csv.reader(csvfile, delimiter=',')
+        # Read the header row first
+        csv_header = next(csvreader)
+        print(f"CSV Header: {csv_header}")       
 
-     print(csvreader)
+        for row in csvreader:
+                dates_list.append(row[0])
+                profit_list.append(row[1])
 
-     # Read the header row first (skip this step if there is now header)
-     csv_header = next(csvreader)
-     print(f"CSV Header: {csv_header}")
 
-     Data_list = list(csvreader)
+months_count = len(dates_list)
 
-     # Read each row of data after the header
+#changing list of str to list of int
+profit_list = [int(i) for i in profit_list]
 
-     for row in Data_list:
-                months_count += 1
+net_profit = sum(profit_list)
+
+list_changes = [j-i for i, j in zip(profit_list[:-1], profit_list[1:])]
+#we have dropped the last term from profit_list and subtracted from profit_list without the first term
+#profit_list[:-1] starts at jan-2010 but ends with jan-2017
+#profit_list[1:] starts at feb-2010 and ends with feb-2017
+#index of list_changes begins with 0 = from jan-2010 to feb 2010 so call index 0 feb change
+
+def average(numbers):
+    length = len(numbers)
+    total = 0.0
+    for number in numbers:
+        total += number
+    return total / length
+
+greatest_increase = max(list_changes)
+
+max_index = list_changes.index(greatest_increase)
+
+#gives index of prior month so must adjust by adding one to get correct date
+print(dates_list[max_index + 1])
+
+greatest_decrease = min(list_changes)
+
 print(f"Total Months: {months_count}")
-
+print(f"Total: {net_profit}")
+print(f"Average Change: ${round(average(list_changes),2)}")
+print(f"Greatest Increase in Profits: {(dates_list[max_index + 1])} (${greatest_increase})")
+print(f"Greatest Decrease in Profits: (${greatest_decrease})")
+#print(dates_list)
+#print(profit_list)
 
