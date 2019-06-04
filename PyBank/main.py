@@ -24,7 +24,7 @@ with open(csvpath, newline='') as csvfile:
 
         # Read the header row first
         csv_header = next(csvreader)
-        print(f"CSV Header: {csv_header}")       
+        #print(f"CSV Header: {csv_header}")       
 
         for row in csvreader:
                 dates_list.append(row[0])
@@ -56,15 +56,17 @@ greatest_increase = max(list_changes)
 max_index = list_changes.index(greatest_increase)
 
 #gives index of prior month so must adjust by adding one to get correct date
-print(dates_list[max_index + 1])
 
 greatest_decrease = min(list_changes)
 
+min_index = list_changes.index(greatest_decrease)
+
+print("Financial Analysis of Budget Data")
+print("----------")
 print(f"Total Months: {months_count}")
-print(f"Total: {net_profit}")
+print(f"Total: ${net_profit}")
 print(f"Average Change: ${round(average(list_changes),2)}")
 print(f"Greatest Increase in Profits: {(dates_list[max_index + 1])} (${greatest_increase})")
-print(f"Greatest Decrease in Profits: (${greatest_decrease})")
-#print(dates_list)
-#print(profit_list)
+print(f"Greatest Decrease in Profits: {(dates_list[min_index +1])} (${greatest_decrease})")
+print("----------")
 
