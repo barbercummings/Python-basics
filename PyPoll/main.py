@@ -33,36 +33,43 @@ votes_count = len(id_list)
 
 #finding list of candidates
 candidate_names = list(set(candidate_list))
-print(candidate_names)
+#print(candidate_names)
 
 #finding percent and number of votes per candidate
 #Khan
 khan_num = candidate_list.count('Khan')
-khan_percent = khan_num / votes_count
-print(khan_percent)
+khan_percent = "{:.3%}".format(khan_num / votes_count)
+#print(f"Khan: {khan_percent} ({(khan_num)})")
 
 #Correy
 correy_num = candidate_list.count('Correy')
-correy_percent = correy_num / votes_count
-print(correy_percent)
+correy_percent = "{:.3%}".format(correy_num / votes_count)
+#print(f"Correy: {correy_percent} ({(correy_num)})")
 
 #Li
 li_num = candidate_list.count('Li')
-li_percent = li_num / votes_count
-print(li_percent)
+li_percent = "{:.3%}".format(li_num / votes_count)
+#print(f"Li: {li_percent} ({(li_num)})")
 
 #O'Tooley
 otooley_num = candidate_list.count('O\'Tooley')
-otooley_percent = otooley_num / votes_count
-print(otooley_percent)
+otooley_percent = "{:.3%}".format(otooley_num / votes_count)
+#print(f"O\'Tooley: {otooley_percent} ({(otooley_num)})")
 
 #finding a winner
 
-print(max(set(candidate_list), key=candidate_list.count))
+#print(f"Winner: {max(set(candidate_list), key=candidate_list.count)}")
 
 
 #print findings
 print("Election Results")
 print("----------")
-print(f"Total Results: {votes_count}")
+print(f"Total Votes: {votes_count}")
+print("----------")
+print(f"Khan: {khan_percent} ({(khan_num)})")
+print(f"Correy: {correy_percent} ({(correy_num)})")
+print(f"Li: {li_percent} ({(li_num)})")
+print(f"O\'Tooley: {otooley_percent} ({(otooley_num)})")
+print("----------")
+print(f"Winner: {max(set(candidate_list), key=candidate_list.count)}")
 print("----------")
